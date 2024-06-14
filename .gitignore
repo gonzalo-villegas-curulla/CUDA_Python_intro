@@ -1,0 +1,30 @@
+# ################  Ignore extension files: ############
+
+*.pdf
+*.eps
+*.log
+*.png
+
+# ######### SPECIFIC FILES ##########
+
+gtc2017-numba-master.zip
+
+#temp.py
+#test.zip
+#test01.py
+#test02.py
+
+# ################# Auto things and OS ###########
+
+.DS_Store
+Thumbs.db
+__pycache__/
+
+
+
+
+# ################ FOLDERS ##################
+
+gtc2017-numba-master/
+
+# MeasureInletOutlet/Photos/: Ignores all files and subdirectories in the MeasureInletOutlet/Photos/ directory
