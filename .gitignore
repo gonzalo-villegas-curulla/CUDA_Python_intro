@@ -14,17 +14,16 @@ gtc2017-numba-master.zip
 #test01.py
 #test02.py
 
-# ################# Auto things and OS ###########
-
-.DS_Store
-Thumbs.db
-__pycache__/
-
-
-
 
 # ################ FOLDERS ##################
 
 gtc2017-numba-master/
 
 # MeasureInletOutlet/Photos/: Ignores all files and subdirectories in the MeasureInletOutlet/Photos/ directory
+
+
+# ################# Auto things and OS ###########
+
+.DS_Store
+Thumbs.db
+__pycache__/
