@@ -66,3 +66,20 @@ cudakernel1[1,1](array)
 print('Updated array: ', array,' see?')
 
 
+
+# %% Now leverage from the fact that 2^20 = 1024*1024
+
+gsize = 1024
+bsize = 1024
+
+# Let's add 0.5 to a 1024x1024 array of zeros
+array = np.zeros(gsize*bsize, dtype=np.float32)
+print('The array zeros(1024x1024) at init:', array)
+
+print('Launch kernel cudakernel1[1024,1024](array)')
+cudakernel1[1024,1024](array)
+print('Updated array: ', array)
+
+# Let's compare them
+print('The result: ', np.all(array == 0.5+np.zeros(gsize*bsize, dtype=np.float32) ) )
+
