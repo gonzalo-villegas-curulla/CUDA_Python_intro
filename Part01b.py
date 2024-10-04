@@ -11,7 +11,7 @@ import numpy as np
 import warnings
 warnings.filterwarnings("ignore")
 
-# %%
+
 
 @cuda.jit
 def cudakernel0(array):
@@ -75,7 +75,7 @@ print('Updated array:', array)
 
 # ===================================
 """
-grid in 3D
+grid \in 3D
 
 block has dimensions:
     (cuda.blockDim.x, cuda.blockDim.y, cuda.blockDim.z)
@@ -151,14 +151,12 @@ if 0:
     p = np.float32(range(1,10))    
     c = p[::-1]
     
-    %timeit np.polyval(p, a)
-    %timeit np.polynomial.polynomial.polyval(a, c)
+    # %timeit np.polyval(p, a)
+    # %timeit np.polynomial.polynomial.polyval(a, c)
         
     print('Maximum absolute difference:', np.max(np.abs(np.polyval(p,a)-np.polynomial.polynomial.polyval(a,c))))
     
-    %timeit np.polynomial.polynomial.polyval(a,c,tensor=False)
-    
-
+    # %timeit np.polynomial.polynomial.polyval(a,c,tensor=False)
 
 
 # Now, use a cuda kernel
@@ -193,7 +191,7 @@ numpy_result = np.polyval(coeffs, array)
 
 print('Max rel error compared to numpy.polyval:', np.max(np.abs(numpy_result-result)))
 
-%timeit cuda_polyval[2048,1024](result, array, coeffs)
+# %timeit cuda_polyval[2048,1024](result, array, coeffs)
 
 
 # Time the the time on the GPU only:
@@ -203,4 +201,4 @@ d_coeffs = cuda.to_device(coeffs)
 d_result = cuda.to_device(result)
 
 # %timeit cuda_polyval[2048,1024](d_result, d_array, d_coeffs)
-%timeit cuda_polyval[2048, 1024](d_result, d_array, d_coeffs)
+# %timeit cuda_polyval[2048, 1024](d_result, d_array, d_coeffs)
