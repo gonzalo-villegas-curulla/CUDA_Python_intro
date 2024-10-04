@@ -1,3 +1,5 @@
+# %%
+
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -204,3 +206,5 @@ d_result = cuda.to_device(result)
 
 # %timeit cuda_polyval[2048,1024](d_result, d_array, d_coeffs)
 %timeit cuda_polyval[2048, 1024](d_result, d_array, d_coeffs)
+
+# %%
