@@ -55,6 +55,7 @@ full_im = rgb2gray(skimage.data.coffee()).astype(np.float32) / 255
 # plt.title('Full size image:')
 
 im = full_im[150:350,200:400].copy()
+# im = full_im
 # plt.figure()
 # plt.imshow(im, cmap='gray')
 # plt.title('Part of the image we use:')
@@ -63,7 +64,7 @@ im = full_im[150:350,200:400].copy()
 
 ## %% TRY the kernel on the IM
 res   = np.empty_like(im)
-mask  = np.random.randn(13,13).astype(np.float32)
+mask  = np.random.rand(13,13).astype(np.float32)
 mask /= mask.sum()
 print('Mask dims:', mask.shape )
 print('Mask first (3,3) elements:\n', mask[:3,:3])
@@ -77,4 +78,27 @@ print(gsize, bsize)
 
 cuda_convo[gsize, bsize](res, mask, im)
 
+# Plot the convolved image
+plt.figure()
+plt.imshow(im, cmap='gray')
+plt.figure()
+plt.imshow(res, cmap='gray')
 
+# %% Check the error
+from scipy.ndimage.filters import convolve as scipy_convolve 
+scipy_result = scipy_convolve(im, mask, mode='constant', cval=0.0, origin=0)
+print('Max rel error:',np.max(np.abs(res-scipy_result)/np.abs(scipy_result)))
+# plt.figure()
+# plt.imshow(scipy_result,cmap='gray')
+
+# %% TIMING our kernel
+%timeit cuda_convo[gsize, bsize](res, mask, im)
+scipy_result = np.empty_like(im)
+%timeit scipy_convolve(im, mask, output=scipy_result, mode='constant', cval=0.0, origin=0)
+
+# %% remove the memory transfer times
+dev_im   = cuda.to_device(im)
+dev_mask = cuda.to_device(mask)
+dev_res  = cuda.to_device(res)
+
+%timeit cuda_convo[gsize, bsize](dev_res, dev_mask, dev_im)
