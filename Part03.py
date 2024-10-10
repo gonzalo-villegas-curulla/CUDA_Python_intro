@@ -92,7 +92,9 @@ print('Max rel error:',np.max(np.abs(res-scipy_result)/np.abs(scipy_result)))
 # plt.imshow(scipy_result,cmap='gray')
 
 # %% TIMING our kernel
+cuda.synchronize()
 %timeit cuda_convo[gsize, bsize](res, mask, im)
+cuda.synchronize()
 scipy_result = np.empty_like(im)
 %timeit scipy_convolve(im, mask, output=scipy_result, mode='constant', cval=0.0, origin=0)
 

@@ -13,7 +13,8 @@ gtc2017-numba-master.zip
 #test.zip
 #test01.py
 #test02.py
-
+test*
+cuda-samples*
 
 # ################ FOLDERS ##################
 
