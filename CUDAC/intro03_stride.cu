@@ -6,15 +6,18 @@
 __global__
 void add(int n, float *x, float *y){
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
-    if (idx<n){
-        y[idx] = x[idx] + y[idx];
-    }
+    int stride = blockDim.x + gridDim.x;
+    //if (idx<n){
+        for (int IDX = idx; IDX<n; IDX += stride){
+            y[IDX] = x[IDX] + y[IDX];
+        }
+    //}
 }
 
 
 int main(void){
 
-    int N = 1<<30;
+    int N = 1<<16;
     float *x, *y;
 
     cudaMallocManaged(&x, N*sizeof(float));
@@ -27,7 +30,7 @@ int main(void){
         y[idx] = val2;
     }
 
-    int blocksize =1024;
+    int blocksize = 256;
     int gridsize = (N + blocksize - 1)/blocksize;
 
     std::cout << "Gsize: " << gridsize << " blocks. Bsize: " << blocksize << " threads per block." << std::endl; 

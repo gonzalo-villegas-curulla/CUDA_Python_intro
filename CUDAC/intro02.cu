@@ -6,15 +6,18 @@
 // function for the GPU device 
 __global__
 void add(int n, float *x, float *y){
-   int idx = blockIdx.x * blockDim.x + threadIdx.x;  
-   if (idx<n){
+   //int idx = blockIdx.x * blockDim.x + threadIdx.x;  
+   //if (idx<n){
+   //     y[idx] = x[idx] + y[idx];
+   //}
+   for (int idx=0; idx<n; idx++){
         y[idx] = x[idx] + y[idx];
    }
 }
 
 int main(void)
 {
-    int N =  1<<30; // ($1)*2^($2) elements
+    int N =  1<<16; // ($1)*2^($2) elements
     //std::cout << N <<"\n";
 
     //  Memory allocations:
