@@ -10,6 +10,7 @@ void add(int n, float *x, float *y){
    //if (idx<n){
    //     y[idx] = x[idx] + y[idx];
    //}
+    printf("Hola\n");
    for (int idx=0; idx<n; idx++){
         y[idx] = x[idx] + y[idx];
    }

@@ -17,7 +17,8 @@ void add(int n, float *x, float *y){
 
 int main(void){
 
-    int N = 1<<16;
+    int N = 80;//1<<20;
+    printf("      N = %d\n", N);
     float *x, *y;
 
     cudaMallocManaged(&x, N*sizeof(float));
@@ -25,12 +26,13 @@ int main(void){
 
     // inits
     float val1 = 1.0, val2 = 2.0;
+
     for (int idx=0; idx<N; idx++){
         x[idx] = val1;
         y[idx] = val2;
     }
 
-    int blocksize = 256;
+    int blocksize = 128;
     int gridsize = (N + blocksize - 1)/blocksize;
 
     std::cout << "Gsize: " << gridsize << " blocks. Bsize: " << blocksize << " threads per block." << std::endl; 
