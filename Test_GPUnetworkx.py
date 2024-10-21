@@ -12,5 +12,5 @@ G = nx.from_pandas_edgelist(df, source="src", target="dst")
 #  ...
 
 nxcg_G = nxcg.from_networkx(G)             # conversion happens once here
-nx.betweenness_centrality(nxcg_G, k=1000)  # nxcg Graph type causes cugraph backend
+nx.betweenness_centrality(nxcg_G, k=1000,backend="cugraph")  # nxcg Graph type causes cugraph backend
                                            # to be used, no conversion necessary
